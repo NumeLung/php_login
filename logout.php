@@ -8,6 +8,6 @@ session_unset();
 session_destroy();
 
 // Redirect the user back to the login page or any other desired page
-header("Location: login.html");
+header("Location: login.php");
 exit();
 ?>
