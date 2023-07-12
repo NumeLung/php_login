@@ -20,7 +20,7 @@ if (!empty($_POST['cities'])) {
 //todo formi4ka za dobavqne i redaktirane na slujiteli
 /*redaktirane e sus id na klient, update query
 nov klient e bez id, insert query*/
-//todo da moga da cukam vurhu daden klient i da redaktiram detaili
+
 ?>
 
 <html>
@@ -43,7 +43,7 @@ nov klient e bez id, insert query*/
             <!-- Modal content -->
             <div class="modal-content">
                 <div class="modal-header">
-                    <span class="close">&times;</span>
+                    <span class="close" id="clearContent">&times;</span>
                     <h2>Добавяне на потербител</h2>
                 </div>
                 <div class="modal-body">
@@ -63,14 +63,19 @@ nov klient e bez id, insert query*/
                         <label>Адрес</label><br>
                         <input type="text" id="inputAddress"><br>
                         <label>Град</label><br>
-                        <select>Град<br>
-                            <?php
-                            echo "<option value=\"0\">Изберете град</option>";
+                        <?php
+                            echo "<select id='inputCity'>";
+                            echo "<option value=''>Град</option>";
+                            foreach ($options as $option) {
+                            $selected = $_POST['cities'] == $option['id'] ? 'selected' : '';
+                            echo "<option $selected value='{$option['id']}'>{$option['name']}</option>";
+                            }
+                            echo "</select>";
                             ?>
-                        </select>
                     </form>
                 </div>
                 <div class="modal-footer">
+
                     <button type="submit" style="text-align: center;">Подай</button>
                 </div>
             </div>

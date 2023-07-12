@@ -77,3 +77,7 @@ function openModal(employeeID) {
   document.getElementById("inputCity").value = employee.IdCity;
 
 }
+
+function clearContent(){
+  document.getElementById('inputFirstName').innerHTML = '';
+}
