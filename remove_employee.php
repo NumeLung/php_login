@@ -1,12 +1,12 @@
 <?php
-require "include.php";
+require "include/include.php";
 
 if (!isset($_SESSION["username"]) || empty($_SESSION["isAdmin"])) {
     header("Location: login.html");
     exit();
 }
 
-require "Database.php";
+require "include/Database.php";
 $db = new Database();
 
 if(isset($_GET['id'])) {
@@ -28,7 +28,7 @@ if(isset($_GET['id'])) {
     // Check if the row was successfully deleted
     if ($stmt->affected_rows > 0) {
          echo "Row with UserID $userID has been deleted successfully.";
-         header("Location: htdocs/admin.php");
+         header("Location: home.php" /*. $_GET['IdCity']*/);
     } else {
         echo "No row found with UserID $userID.";
     }
