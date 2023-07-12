@@ -28,7 +28,7 @@ if(!empty($employees)){
         $aEmployeesForJS[$employee["EmployeeID"]] = $employee;
         //todo navsqkude da se izvejdat dati v bege format bez chas
         echo "<tr>";
-        echo "<td><a href='javascript:void(0)' onclick='handleClick(" . $employee["EmployeeID"] . ")' id='employee_" . $employee["EmployeeID"] . "'>" . $employee["EmployeeID"] . "</a></td>";
+        echo "<td><a href='javascript:void(0)' onclick='openModal(" . $employee["EmployeeID"] . ")' id='employee_" . $employee["EmployeeID"] . "'>" . $employee["EmployeeID"] . "</a></td>";
         echo "<td>" . $employee["FirstName"] . "</td>";
         echo "<td>" . $employee["LastName"] . "</td>";
         echo "<td>" . $employee["Title"] . "</td>";

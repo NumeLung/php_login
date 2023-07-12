@@ -58,10 +58,22 @@ document.addEventListener("DOMContentLoaded", function(){
 });
 
 
-function handleClick(employeeID) {
+function openModal(employeeID) {
   // Find the corresponding employee object using the employee ID
   var employee = employees[employeeID];
 
-  // Log the employee object to the console
-  console.log(employee);
+  // Open the modal
+  var modal = document.getElementById("myModal");
+  modal.style.display = "block";
+
+  // Load the employee data into the textboxes
+  document.getElementById("inputFirstName").value = employee.FirstName;
+  document.getElementById("inputLastName").value = employee.LastName;
+  document.getElementById("inputTitle").value = employee.Title;
+  document.getElementById("inputTitleOfCourtesy").value = employee.TitleOfCourtesy;
+  document.getElementById("inputBirthDate").value = employee.BirthDate;
+  document.getElementById("inputHireDate").value = employee.HireDate;
+  document.getElementById("inputAddress").value = employee.Address;
+  document.getElementById("inputCity").value = employee.IdCity;
+
 }

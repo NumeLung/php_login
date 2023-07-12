@@ -49,28 +49,23 @@ nov klient e bez id, insert query*/
                 <div class="modal-body">
                     <form>
                         <label>Име</label><br>
-                        <input type="text"><br>
+                        <input type="text" id="inputFirstName"><br>
                         <label>Фамилия</label><br>
-                        <input type="text"><br>
+                        <input type="text" id="inputLastName"><br>
                         <label>Работно място</label><br>
-                        <input type="text"><br>
+                        <input type="text" id="inputTitle"><br>
                         <label>Нарицание</label><br>
-                        <input type="text"><br>
+                        <input type="text" id="inputTitleOfCourtesy"><br>
                         <label>Рожденна дата</label><br>
-                        <input type="text"><br>
+                        <input type="text" id="inputBirthDate"><br>
                         <label>Дата наемане</label><br>
-                        <input type="text"><br>
+                        <input type="text" id="inputHireDate"><br>
                         <label>Адрес</label><br>
-                        <input type="text"><br>
+                        <input type="text" id="inputAddress"><br>
                         <label>Град</label><br>
                         <select>Град<br>
                             <?php
                             echo "<option value=\"0\">Изберете град</option>";
-
-                            foreach ($options as $option){
-                            $selected = $_POST['cities'] == $option['id'] ? 'selected' : '';
-                            echo  "<option $selected value=\"{$option['id']}\">{$option['name']}</option>";
-                            }
                             ?>
                         </select>
                     </form>
