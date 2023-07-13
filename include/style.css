@@ -4,6 +4,10 @@ body{
 	padding: 0px;
 	margin: 0px; //prawim_зануляване_на_стиловете_отБраузър
 }
+a{
+	text-decoration: none;
+	color: black;
+}
 .active {
 	background-color: cadetblue;
 }
@@ -68,6 +72,11 @@ table, th, td {
 }
 th, td {
 	background-color: cadetblue;
+
+}
+
+td:hover {
+	background-color: #f2f2f2;
 }
 
 .container {

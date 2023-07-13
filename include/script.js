@@ -40,6 +40,7 @@ document.addEventListener("DOMContentLoaded", function(){
   // Get the <span> element that closes the modal
   var span = document.getElementsByClassName("close")[0];
 
+
   // When the user clicks on the button, open the modal
   btn.addEventListener('click', function (){
     modal.style.display = "block";
@@ -48,11 +49,13 @@ document.addEventListener("DOMContentLoaded", function(){
   // When the user clicks on <span> (x), close the modal
   span.onclick = function() {
     modal.style.display = "none";
+    document.getElementById("ModalForm").reset();
   }
 
   modal.addEventListener('click', function (e){
     if(e.target == modal){
       modal.style.display = "none";
+      document.getElementById("ModalForm").reset();
     }
   });
 });
@@ -76,8 +79,4 @@ function openModal(employeeID) {
   document.getElementById("inputAddress").value = employee.Address;
   document.getElementById("inputCity").value = employee.IdCity;
 
-}
-
-function clearContent(){
-  document.getElementById('inputFirstName').innerHTML = '';
 }

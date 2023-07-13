@@ -47,7 +47,7 @@ nov klient e bez id, insert query*/
                     <h2>Добавяне на потербител</h2>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form id="ModalForm">
                         <label>Име</label><br>
                         <input type="text" id="inputFirstName"><br>
                         <label>Фамилия</label><br>
