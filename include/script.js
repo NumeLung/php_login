@@ -70,6 +70,7 @@ function openModal(employeeID) {
   modal.style.display = "block";
 
   // Load the employee data into the textboxes
+  document.getElementById("inputEmployeeID").value = employeeID;
   document.getElementById("inputFirstName").value = employee.FirstName;
   document.getElementById("inputLastName").value = employee.LastName;
   document.getElementById("inputTitle").value = employee.Title;
@@ -77,6 +78,6 @@ function openModal(employeeID) {
   document.getElementById("inputBirthDate").value = employee.BirthDate;
   document.getElementById("inputHireDate").value = employee.HireDate;
   document.getElementById("inputAddress").value = employee.Address;
-  document.getElementById("inputCity").value = employee.IdCity;
+  document.getElementById("inputIdCity").value = employee.IdCity;
 
 }

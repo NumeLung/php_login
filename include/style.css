@@ -99,6 +99,10 @@ label {
 	padding: 5px;
 }
 
+input {
+	margin-bottom: 10px;
+}
+
 /* The Modal (background) */
 .modal {
 	display: none; /* Hidden by default */

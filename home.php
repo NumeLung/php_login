@@ -9,17 +9,13 @@ if (!isset($_SESSION["username"])) {
 
 require_once "include/Database.php";
 $db = new Database();
+
 $options = $db->select("SELECT id, name FROM cities");
 
 $employees = [];
 if (!empty($_POST['cities'])) {
     $employees = $db->select("SELECT * FROM employees WHERE idCity = " . intval($_POST['cities']));
 }
-
-
-//todo formi4ka za dobavqne i redaktirane na slujiteli
-/*redaktirane e sus id na klient, update query
-nov klient e bez id, insert query*/
 
 ?>
 
@@ -37,9 +33,12 @@ nov klient e bez id, insert query*/
             <a href="home.php" class="active">Home</a>
         </div>
 
-
+        <?php
+        if ($_SESSION["isAdmin"] == 1){
+            ?>
         <!-- The Modal -->
         <div id="myModal" class="modal">
+            <form id="ModalForm" method="POST" style="margin: 0px;" action="include/add_update_employee.php">
             <!-- Modal content -->
             <div class="modal-content">
                 <div class="modal-header">
@@ -47,24 +46,25 @@ nov klient e bez id, insert query*/
                     <h2>Добавяне на потербител</h2>
                 </div>
                 <div class="modal-body">
-                    <form id="ModalForm">
+                        <!--<label>ID</label><br>-->
+                        <input type="text" name="inputEmployeeID" id="inputEmployeeID" style="display: none;"><br>
                         <label>Име</label><br>
-                        <input type="text" id="inputFirstName"><br>
+                        <input type="text" name="inputFirstName" id="inputFirstName"><br>
                         <label>Фамилия</label><br>
-                        <input type="text" id="inputLastName"><br>
+                        <input type="text" name="inputLastName" id="inputLastName"><br>
                         <label>Работно място</label><br>
-                        <input type="text" id="inputTitle"><br>
+                        <input type="text" name="inputTitle" id="inputTitle"><br>
                         <label>Нарицание</label><br>
-                        <input type="text" id="inputTitleOfCourtesy"><br>
+                        <input type="text" name="inputTitleOfCourtesy" id="inputTitleOfCourtesy"><br>
                         <label>Рожденна дата</label><br>
-                        <input type="text" id="inputBirthDate"><br>
+                        <input type="text" name="inputBirthDate" id="inputBirthDate" value="YYYY-MM-DD 00:00:00"><br>
                         <label>Дата наемане</label><br>
-                        <input type="text" id="inputHireDate"><br>
+                        <input type="text" name="inputHireDate" id="inputHireDate" value="YYYY-MM-DD 00:00:00"><br>
                         <label>Адрес</label><br>
-                        <input type="text" id="inputAddress"><br>
+                        <input type="text" name="inputAddress" id="inputAddress"><br>
                         <label>Град</label><br>
                         <?php
-                            echo "<select id='inputCity'>";
+                            echo "<select id='inputIdCity' style=\"margin-bottom: 20px;\" name='inputIdCity'>";
                             echo "<option value=''>Град</option>";
                             foreach ($options as $option) {
                             $selected = $_POST['cities'] == $option['id'] ? 'selected' : '';
@@ -72,37 +72,36 @@ nov klient e bez id, insert query*/
                             }
                             echo "</select>";
                             ?>
-                    </form>
                 </div>
                 <div class="modal-footer">
-
-                    <button type="submit" style="text-align: center;">Подай</button>
+                    <button type="submit" style="text-align: center; margin-top: 10px; margin-bottom: 10px;">Подай</button>
                 </div>
             </div>
+            </form>
         </div>
-        <!--<div class="container"></div>-->
+        <?php
+        }
+        ?>
 
         <div class="container">
             <?php
-            if ($_SESSION["isAdmin"] == 1){
-
-                echo "<form method=\"POST\">";
-                echo "<label for=\"cities\">Град</label>";
-                echo "<select name=\"cities\" id=\"cities\">";
-                echo "<option value=\"0\">Изберете град</option>";
-
+            if ($_SESSION["isAdmin"] == 1){ ?>
+                <form method="POST"
+                <label for="cities">Град</label>
+                <select name="cities" id="cities">
+                <option value="0">Изберете град</option>"
+                    <?php
                 foreach ($options as $option){
                 $selected = $_POST['cities'] == $option['id'] ? 'selected' : '';
                 echo  "<option $selected value=\"{$option['id']}\">{$option['name']}</option>";
                 }
-
-             echo "</select>";
-             echo "<br>";
-             echo "<button style=\"text-align: center; margin-top: 10px;\">Изпрати</button><br>";
-             echo "<button type=\"button\" id=\"myBtn\" style=\"margin-top: 15px;\">Добави потребител</button>";
-             echo "</form>";
-            }
-             ?>
+                ?>
+             </select>
+             <br>
+             <button style="text-align: center; margin-top: 10px;">Изпрати</button><br>
+             <button type="button" id="myBtn" style="margin-top: 15px;">Добави потребител</button>
+             </form>
+            <?php } ?>
             <!-- Debug info
             <p style="text-align: center;">ID на избрания град: <span id="selectedCity"><?php /*=($_POST['cities']??'')*/?></span></p>-->
         </div>

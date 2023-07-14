@@ -1,6 +1,6 @@
 <?php
 
-require_once "config.php";
+require_once "include/config.php";
 
 $db = new Database();
 
@@ -26,15 +26,14 @@ if(!empty($employees)){
     echo "<tr><th>ID</th><th>Име</th><th>Фамилия</th><th>Работа</th><th>Нарицание</th><th style='padding: 10px;'>Рожд. дата</th><th style='padding: 14px;'>Дата на наемане</th><th>Адрес</th></tr>";
     foreach ($employees as $employee){
         $aEmployeesForJS[$employee["EmployeeID"]] = $employee;
-        //todo navsqkude da se izvejdat dati v bege format bez chas
         echo "<tr>";
         echo "<td><a href='javascript:void(0)' onclick='openModal(" . $employee["EmployeeID"] . ")' id='employee_" . $employee["EmployeeID"] . "'>" . $employee["EmployeeID"] . "</a></td>";
         echo "<td>" . $employee["FirstName"] . "</td>";
         echo "<td>" . $employee["LastName"] . "</td>";
         echo "<td>" . $employee["Title"] . "</td>";
         echo "<td>" . $employee["TitleOfCourtesy"];
-        echo "<td>" . $employee["BirthDate"] . "</td>";
-        echo "<td>" . $employee["HireDate"] . "</td>";
+        echo "<td>" . explode(" ", $employee["BirthDate"])[0] . "</td>";
+        echo "<td>" . explode(" ", $employee["HireDate"])[0] . "</td>";
         echo "<td>" . $employee["AddressWithCity"] . "</td>";
         if(!empty($_SESSION["isAdmin"])){
         echo "<td><button onclick='confirmRemove(" . $employee["EmployeeID"] . ")' class=\"removeBttn\">Изтрии</button></td>";
