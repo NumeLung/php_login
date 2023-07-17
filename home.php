@@ -83,35 +83,60 @@ if (!empty($_POST['cities'])) {
         }
         ?>
 
+        <?php
+        if ($_SESSION["isAdmin"] == 1){ ?>
         <div class="container">
-            <?php
-            if ($_SESSION["isAdmin"] == 1){ ?>
-                <form method="POST"
+            <form method="POST">
                 <label for="cities">Град</label>
                 <select name="cities" id="cities">
-                <option value="0">Изберете град</option>"
-                    <?php
-                foreach ($options as $option){
-                $selected = $_POST['cities'] == $option['id'] ? 'selected' : '';
-                echo  "<option $selected value=\"{$option['id']}\">{$option['name']}</option>";
-                }
-                ?>
-             </select>
-             <br>
-             <button style="text-align: center; margin-top: 10px;">Изпрати</button><br>
-             <button type="button" id="myBtn" style="margin-top: 15px;">Добави потребител</button>
-             </form>
-            <?php } ?>
-            <!-- Debug info
-            <p style="text-align: center;">ID на избрания град: <span id="selectedCity"><?php /*=($_POST['cities']??'')*/?></span></p>-->
-        </div>
+                    <option value="0">Изберете град</option>
+                        <?php
+                        foreach ($options as $option){
+                        $selected = $_POST['cities'] == $option['id'] ? 'selected' : '';
+                        echo  "<option $selected value=\"{$option['id']}\">{$option['name']}</option>";
+                        }
+                        ?>
+                </select>
+                <button style="text-align: center; margin-top: 10px;">Изпрати</button><br>
+                <button type="button" id="myBtn" style="margin-top: 15px;">Добави потребител</button>
+            </form>
 
+            <!--forma za obobshten izlged-->
+            <form method="POST">
+                <label for="summary">Обобщи</label>
+                <select name="summary" id="summary">
+                    <option value="0">Избери опция</option>
+                    <option value="citysum">Град</option>
+                    <option value="titlesum">Работа</option>
+                    <option value="titleocsum">Нарицание</option>
+                </select>
+                <button>Заявка</button>
+            </form>
+
+            <!--modal da pokazva rezultatite obshtite podrobno-->
+                <div id="myModal2" class="modal">
+                    <form id="ModalForm" method="POST" style="margin: 0px;" action="include/add_update_employee.php">
+
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <span class="close" id="clearContent">&times;</span>
+                                <h2>Резултат</h2>
+                            </div>
+                            <div class="modal-body">
+
+                            </div>
+                            <div class="modal-footer">Край на резултата</div>
+                        </div>
+                    </form>
+                </div>
+            <?php require "include/summary.php" ?>
+        </div>
+        <?php } ?>
         <div class="container">
             <p style="text-align: center;">
                 <?php require_once "include/generateDB.php" ?>
             </p>
         </div>
-
         <div class="footer" id="footer">
             <p> Made by:
                 <a href="https://www.instagram.com/ivaylo.kolev1/" class="insta">Ivaylo Kolev</a>

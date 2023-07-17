@@ -3,10 +3,9 @@ include "config.php";
 include "Database.php";
 $db = new Database();
 
-// Assuming you have established a database connection, you can retrieve the necessary values from the $_POST variable
 $inputEmployeeID = $_POST['inputEmployeeID'];
-$inputFirstName = $_POST['inputFirstName'];
-$inputLastName = $_POST['inputLastName'];
+$inputFirstName = mysqli_real_escape_string(CONN, $_POST['inputFirstName']);
+$inputLastName = mysqli_real_escape_string(CONN, $_POST['inputLastName']);
 $inputTitle = $_POST['inputTitle'];
 $inputTitleOfCourtesy = $_POST['inputTitleOfCourtesy'];
 $inputBirthDate = $_POST['inputBirthDate'];
@@ -28,8 +27,9 @@ if(!empty($inputEmployeeID)){
     mysqli_query($db->connection, $updateQuery);
 }
 else {
-    $insertQuery = "INSERT INTO employees (LastName, FirstName, Title, TitleOfCourtesy, BirthDate, HireDate, Address, IdCity) 
-        VALUES ('$inputLastName', '$inputFirstName', '$inputTitle', '$inputTitleOfCourtesy', '$inputBirthDate', '$inputHireDate', '$inputAddress', $inputIdCity)";
+    $insertQuery = "
+    INSERT INTO employees (LastName, FirstName, Title, TitleOfCourtesy, BirthDate, HireDate, Address, IdCity) 
+    VALUES ('$inputLastName', '$inputFirstName', '$inputTitle', '$inputTitleOfCourtesy', '$inputBirthDate', '$inputHireDate', '$inputAddress', $inputIdCity)";
     mysqli_query($db->connection, $insertQuery);
 }
 header("Location: /home.php");

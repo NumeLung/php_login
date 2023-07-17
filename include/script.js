@@ -33,17 +33,22 @@ function confirmRemove(employeeID) {
 document.addEventListener("DOMContentLoaded", function(){
   // Get the button that opens the modal
   var btn = document.getElementById("myBtn");
+  var btn2 = document.getElementById("myBtn2");
 
   // Get the modal
   var modal = document.getElementById("myModal");
+  var modal2 = document.getElementById("myModal2");
 
   // Get the <span> element that closes the modal
   var span = document.getElementsByClassName("close")[0];
-
+  /*var span2 = document.getElementsByClassName("close")[0];*/
 
   // When the user clicks on the button, open the modal
   btn.addEventListener('click', function (){
     modal.style.display = "block";
+  });
+  btn2.addEventListener('click', function (){
+    modal2.style.display = "block";
   });
 
   // When the user clicks on <span> (x), close the modal
@@ -51,6 +56,10 @@ document.addEventListener("DOMContentLoaded", function(){
     modal.style.display = "none";
     document.getElementById("ModalForm").reset();
   }
+  /*span2.onclick = function() {
+    modal2.style.display = "none";
+    document.getElementById("ModalForm").reset();
+  }*/
 
   modal.addEventListener('click', function (e){
     if(e.target == modal){
@@ -58,17 +67,21 @@ document.addEventListener("DOMContentLoaded", function(){
       document.getElementById("ModalForm").reset();
     }
   });
+  /*modal2.addEventListener('click', function (e){
+    if(e.target == modal2){
+      modal2.style.display = "none";
+      document.getElementById("ModalForm").reset();
+    }
+  });*/
 });
 
 
 function openModal(employeeID) {
   // Find the corresponding employee object using the employee ID
   var employee = employees[employeeID];
-
   // Open the modal
   var modal = document.getElementById("myModal");
   modal.style.display = "block";
-
   // Load the employee data into the textboxes
   document.getElementById("inputEmployeeID").value = employeeID;
   document.getElementById("inputFirstName").value = employee.FirstName;
@@ -79,5 +92,8 @@ function openModal(employeeID) {
   document.getElementById("inputHireDate").value = employee.HireDate;
   document.getElementById("inputAddress").value = employee.Address;
   document.getElementById("inputIdCity").value = employee.IdCity;
+};
 
-}
+
+
+

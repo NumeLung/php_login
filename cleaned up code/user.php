@@ -30,6 +30,8 @@ if (!empty($_POST['cities'])) {
                 echo "<a href=\"home.php\">Admin DB Ramble</a>";
             }
             ?>
+            <!-- Debug info
+            <p style="text-align: center;">ID на избрания град: <span id="selectedCity"><?php /*=($_POST['cities']??'')*/?></span></p>-->
 
         </div>
         <div class="container">

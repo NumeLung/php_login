@@ -4,6 +4,7 @@ require_once "include/config.php";
 
 $db = new Database();
 
+
 $employees = [];
 if (!empty($_POST['cities'])){
     $employees = $db->select("
@@ -18,9 +19,7 @@ else {
     FROM employees e
     LEFT JOIN cities c ON c.id = e.IdCity");
 }
-
 $aEmployeesForJS = [];
-
 if(!empty($employees)){
     echo "<table>";
     echo "<tr><th>ID</th><th>Име</th><th>Фамилия</th><th>Работа</th><th>Нарицание</th><th style='padding: 10px;'>Рожд. дата</th><th style='padding: 14px;'>Дата на наемане</th><th>Адрес</th></tr>";
