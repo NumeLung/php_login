@@ -33,23 +33,26 @@ function confirmRemove(employeeID) {
 document.addEventListener("DOMContentLoaded", function(){
   // Get the button that opens the modal
   var btn = document.getElementById("myBtn");
-  var btn2 = document.getElementById("myBtn2");
+  /*var btn2 = document.getElementById("myBtn2");*/
 
   // Get the modal
   var modal = document.getElementById("myModal");
-  var modal2 = document.getElementById("myModal2");
+  /*var modal2 = document.getElementById("myModal2");*/
 
   // Get the <span> element that closes the modal
   var span = document.getElementsByClassName("close")[0];
   /*var span2 = document.getElementsByClassName("close")[0];*/
 
   // When the user clicks on the button, open the modal
-  btn.addEventListener('click', function (){
-    modal.style.display = "block";
-  });
-  btn2.addEventListener('click', function (){
+  if (btn){
+    btn.addEventListener('click', function (){
+      modal.style.display = "block";
+    });
+  }
+
+  /*btn2.addEventListener('click', function (){
     modal2.style.display = "block";
-  });
+  });*/
 
   // When the user clicks on <span> (x), close the modal
   span.onclick = function() {
@@ -75,7 +78,6 @@ document.addEventListener("DOMContentLoaded", function(){
   });*/
 });
 
-
 function openModal(employeeID) {
   // Find the corresponding employee object using the employee ID
   var employee = employees[employeeID];
@@ -94,6 +96,46 @@ function openModal(employeeID) {
   document.getElementById("inputIdCity").value = employee.IdCity;
 };
 
-
+document.addEventListener("DOMContentLoaded", function () {
+  // Get references to the select and target elements
+  const critlabel = document.getElementById("critlabel")
+  const selectElement = document.getElementById("search_options");
+  const search_city_properties = document.getElementById("search_city_properties");
+  const search_year_properties = document.getElementById("search_year_properties");
+  const search_titleofcourt_properties = document.getElementById("search_titleofcourt_properties");
+  // Add an event listener to the select element
+  selectElement.addEventListener("change", function () {
+    // Get the selected value from the select element
+    const selectedValue = selectElement.value;
+    // Use a switch statement to handle different cases
+    switch (selectedValue) {
+      case "city":
+        critlabel.style.display = "inline";
+        search_city_properties.style.display = "inline";
+        search_year_properties.style.display = "none";
+        search_titleofcourt_properties.style.display = "none";
+        break;
+      case "years":
+        critlabel.style.display = "inline";
+        search_city_properties.style.display = "none";
+        search_year_properties.style.display = "inline";
+        search_titleofcourt_properties.style.display = "none";
+        break;
+      case "titleofcourtesy":
+        critlabel.style.display = "inline";
+        search_city_properties.style.display = "none";
+        search_year_properties.style.display = "none";
+        search_titleofcourt_properties.style.display = "inline";
+        break;
+        // Add more cases for other values if needed
+      default:
+        critlabel.style.display = "none";
+        search_city_properties.style.display = "none";
+        search_year_properties.style.display = "none";
+        search_titleofcourt_properties.style.display = "none";
+        break;
+    }
+  });
+});
 
 

@@ -11,6 +11,8 @@ require_once "include/Database.php";
 $db = new Database();
 
 $options = $db->select("SELECT id, name FROM cities");
+$years = $db->select("SELECT DISTINCT(YEAR(Birthdate)) AS BirthDate FROM employees;");
+$titlecoptions = $db->select("SELECT DISTINCT(Title) FROM employees ORDER BY Title ASC");
 
 $employees = [];
 if (!empty($_POST['cities'])) {
@@ -87,49 +89,45 @@ if (!empty($_POST['cities'])) {
         if ($_SESSION["isAdmin"] == 1){ ?>
         <div class="container">
             <form method="POST">
-                <label for="cities">Град</label>
-                <select name="cities" id="cities">
-                    <option value="0">Изберете град</option>
+
+                <label for="search_options">Търсене по:</label>
+                <select name="search_options" id="search_options">
+                    <option value="0">Изберете опция</option>
+                    <option value="city">Град</option>
+                    <option value="years">Година раждане</option>
+                    <option value="titleofcourtesy">Длъжност</option>
+                </select><br>
+
+                <label for="search_properties" id="critlabel" style="display: none;">Критерии:</label>
+                <select name="search_city_properties" id="search_city_properties" style="margin-top: 20px; display: none;">
+                    <option value="allcities">Всички градове</option>
                         <?php
                         foreach ($options as $option){
-                        $selected = $_POST['cities'] == $option['id'] ? 'selected' : '';
-                        echo  "<option $selected value=\"{$option['id']}\">{$option['name']}</option>";
+                            $selected = $_POST['cities'] == $option['id'] ? 'selected' : '';
+                            echo  "<option $selected value=\"{$option['id']}\">{$option['name']}</option>";
                         }
                         ?>
                 </select>
-                <button style="text-align: center; margin-top: 10px;">Изпрати</button><br>
-                <button type="button" id="myBtn" style="margin-top: 15px;">Добави потребител</button>
-            </form>
-
-            <!--forma za obobshten izlged-->
-            <form method="POST">
-                <label for="summary">Обобщи</label>
-                <select name="summary" id="summary">
-                    <option value="0">Избери опция</option>
-                    <option value="citysum">Град</option>
-                    <option value="titlesum">Работа</option>
-                    <option value="titleocsum">Нарицание</option>
+                <select name="search_year_properties" id="search_year_properties" style="margin-top: 20px; display: none;">
+                    <option value="allyears" style="text-align: center;">Всички години</option>
+                    <?php
+                    foreach ($years as $yearsoption){
+                        $selectedyear = $_POST['employees'] == $yearsoption['BirthDate'] ? 'selected' : '';
+                        echo  "<option $selectedyear value=\"{$yearsoption['BirthDate']}\">{$yearsoption['BirthDate']}</option>";
+                    }
+                    ?>
                 </select>
-                <button>Заявка</button>
+                <select name="search_titleofcourt_properties" id="search_titleofcourt_properties" style="margin-top: 20px; display: none;">
+                    <option value="alltitles" style="text-align: center;">Изберете титла</option>
+                    <?php
+                    foreach ($titlecoptions as $tcoption){
+                        $selectedtitle = $_POST['employees'] == $tcoption['Title'] ? 'selected' : '';
+                        echo  "<option $selectedtitle value=\"{$tcoption['Title']}\">{$tcoption['Title']}</option>";
+                    }
+                    ?>
+                </select><br>
             </form>
-
-            <!--modal da pokazva rezultatite obshtite podrobno-->
-                <div id="myModal2" class="modal">
-                    <form id="ModalForm" method="POST" style="margin: 0px;" action="include/add_update_employee.php">
-
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <span class="close" id="clearContent">&times;</span>
-                                <h2>Резултат</h2>
-                            </div>
-                            <div class="modal-body">
-
-                            </div>
-                            <div class="modal-footer">Край на резултата</div>
-                        </div>
-                    </form>
-                </div>
-            <?php require "include/summary.php" ?>
+            <button type="button" id="myBtn" style="margin-top: 15px;">Добави потребител</button>
         </div>
         <?php } ?>
         <div class="container">

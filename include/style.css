@@ -13,7 +13,13 @@ a{
 }
 .removeBttn{
 	border-radius: 50%;
+	background-color: crimson;
+	color: #ffffff;
+}
+.showBttn{
+	border-radius: 50%;
 	background-color: cadetblue;
+
 }
 
 #navbar {
@@ -96,7 +102,7 @@ form {
 }
 
 label {
-	padding: 5px;
+	margin-top: 20px;
 }
 
 input {
