@@ -12,13 +12,13 @@ $db = new Database();
 
 $options = $db->select("SELECT id, name FROM cities");
 $years = $db->select("SELECT DISTINCT(YEAR(Birthdate)) AS BirthDate FROM employees;");
-$titlecoptions = $db->select("SELECT DISTINCT(Title) FROM employees ORDER BY Title ASC");
+$titleoptions = $db->select("SELECT DISTINCT(Title) FROM employees ORDER BY Title ASC");
 
 $employees = [];
-if (!empty($_POST['cities'])) {
-    $employees = $db->select("SELECT * FROM employees WHERE idCity = " . intval($_POST['cities']));
+if (!empty($_POST['search_city_properties'])) {
+    $employees = $db->select("SELECT * FROM employees WHERE idCity = " . intval($_POST['search_city_properties']));
 }
-
+$searchOption = $_POST['search_options'] ?? '';
 ?>
 
 <html>
@@ -57,11 +57,11 @@ if (!empty($_POST['cities'])) {
                         <label>Работно място</label><br>
                         <input type="text" name="inputTitle" id="inputTitle"><br>
                         <label>Нарицание</label><br>
-                        <input type="text" name="inputTitleOfCourtesy" id="inputTitleOfCourtesy"><br>
+                        <input type="text" name="inputtitle" id="inputtitle"><br>
                         <label>Рожденна дата</label><br>
-                        <input type="text" name="inputBirthDate" id="inputBirthDate" value="YYYY-MM-DD 00:00:00"><br>
+                        <input type="text" name="inputBirthDate" id="inputBirthDate" value="YYYY-MM-DD"><br>
                         <label>Дата наемане</label><br>
-                        <input type="text" name="inputHireDate" id="inputHireDate" value="YYYY-MM-DD 00:00:00"><br>
+                        <input type="text" name="inputHireDate" id="inputHireDate" value="YYYY-MM-DD"><br>
                         <label>Адрес</label><br>
                         <input type="text" name="inputAddress" id="inputAddress"><br>
                         <label>Град</label><br>
@@ -69,7 +69,7 @@ if (!empty($_POST['cities'])) {
                             echo "<select id='inputIdCity' style=\"margin-bottom: 20px;\" name='inputIdCity'>";
                             echo "<option value=''>Град</option>";
                             foreach ($options as $option) {
-                            $selected = $_POST['cities'] == $option['id'] ? 'selected' : '';
+                            $selected = $_POST['search_city_properties'] == $option['id'] ? 'selected' : '';
                             echo "<option $selected value='{$option['id']}'>{$option['name']}</option>";
                             }
                             echo "</select>";
@@ -93,42 +93,44 @@ if (!empty($_POST['cities'])) {
                 <label for="search_options">Търсене по:</label>
                 <select name="search_options" id="search_options">
                     <option value="0">Изберете опция</option>
-                    <option value="city">Град</option>
-                    <option value="years">Година раждане</option>
-                    <option value="titleofcourtesy">Длъжност</option>
+                    <option value="city" <?= $searchOption == 'city' ? 'selected' : '' ?> > Град</option>
+                    <option value="years" <?= $searchOption == 'years' ? 'selected' : '' ?>>Година раждане</option>
+                    <option value="title" <?= $searchOption == 'title' ? 'selected' : '' ?>>Длъжност</option>
                 </select><br>
 
-                <label for="search_properties" id="critlabel" style="display: none;">Критерии:</label>
-                <select name="search_city_properties" id="search_city_properties" style="margin-top: 20px; display: none;">
-                    <option value="allcities">Всички градове</option>
+                <label for="search_properties" id="critlabel" style="display: <?php if(in_array($searchOption, ['city', 'years', 'title'])) { echo "";} else { echo "none";} ?> ">Критерии:</label>
+                <select name="search_city_properties" id="search_city_properties" style="margin-top: 20px; display: <?= $_POST['search_options'] == 'city' ? '' : 'none' ?> ;" >
+                    <option value="0">Всички градове</option>
                         <?php
                         foreach ($options as $option){
-                            $selected = $_POST['cities'] == $option['id'] ? 'selected' : '';
+                            $selected = $_POST['search_city_properties'] == $option['id'] ? 'selected' : '';
                             echo  "<option $selected value=\"{$option['id']}\">{$option['name']}</option>";
                         }
                         ?>
                 </select>
-                <select name="search_year_properties" id="search_year_properties" style="margin-top: 20px; display: none;">
+                <select name="search_year_properties" id="search_year_properties" style="margin-top: 20px; display: <?= $_POST['search_options'] == 'years' ? '' : 'none' ?> ;">
                     <option value="allyears" style="text-align: center;">Всички години</option>
                     <?php
                     foreach ($years as $yearsoption){
-                        $selectedyear = $_POST['employees'] == $yearsoption['BirthDate'] ? 'selected' : '';
+                        $selectedyear = $_POST['search_year_properties'] == $yearsoption['BirthDate'] ? 'selected' : '';
                         echo  "<option $selectedyear value=\"{$yearsoption['BirthDate']}\">{$yearsoption['BirthDate']}</option>";
                     }
                     ?>
                 </select>
-                <select name="search_titleofcourt_properties" id="search_titleofcourt_properties" style="margin-top: 20px; display: none;">
+                <select name="search_title_properties" id="search_title_properties" style="margin-top: 20px; display: <?= $_POST['search_options'] == 'title' ? '' : 'none' ?> ;;">
                     <option value="alltitles" style="text-align: center;">Изберете титла</option>
                     <?php
-                    foreach ($titlecoptions as $tcoption){
-                        $selectedtitle = $_POST['employees'] == $tcoption['Title'] ? 'selected' : '';
-                        echo  "<option $selectedtitle value=\"{$tcoption['Title']}\">{$tcoption['Title']}</option>";
+                    foreach ($titleoptions as $titleoption){
+                        $selectedtitle = $_POST['search_title_properties'] == $titleoption['Title'] ? 'selected' : '';
+                        echo  "<option $selectedtitle value=\"{$titleoption['Title']}\">{$titleoption['Title']}</option>";
                     }
                     ?>
                 </select><br>
+                <button type="submit" style="margin-top: 20px;">Подай</button><br>
+                <button type="button" id="myBtn" style="margin-top: 15px;">Добави потребител</button>
             </form>
-            <button type="button" id="myBtn" style="margin-top: 15px;">Добави потребител</button>
         </div>
+
         <?php } ?>
         <div class="container">
             <p style="text-align: center;">

@@ -4,21 +4,42 @@ require_once "include/config.php";
 
 $db = new Database();
 
+$query = "
+SELECT e.*,CONCAT(c.name, \", \", e.Address) AS AddressWithCity  
+FROM employees e
+LEFT JOIN cities c ON c.id = e.IdCity 
+";
 
-$employees = [];
-if (!empty($_POST['cities'])){
+if($_POST['search_options'] == 'city'){
+    if(!empty($_POST['search_city_properties'])){
+        $query .= "WHERE idCity = " . intval($_POST['search_city_properties']);
+    }
+}else if($_POST['search_options'] == 'years'){
+    if(!empty($_POST['search_year_properties']) && $_POST['search_year_properties'] != 'allyears') {
+        $query .= "WHERE YEAR(BirthDate) = " . intval($_POST['search_year_properties']);
+    }
+}else if($_POST['search_options'] == 'title'){
+    if(!empty($_POST['search_title_properties']) && $_POST['search_title_properties'] != 'alltitles') {
+        $query .= "WHERE Title = '" . mysqli_real_escape_string($db->connection, $_POST['search_title_properties']) . "' ";
+    }
+}
+
+$employees = $db->select($query);
+
+/*$employees = [];
+if (!empty($_POST['search_city_properties'])){
     $employees = $db->select("
     SELECT e.*,CONCAT(c.name, \", \", e.Address) AS AddressWithCity  
     FROM employees e
     LEFT JOIN cities c ON c.id = e.IdCity
-    WHERE idCity = " . intval($_POST['cities']));
+    WHERE idCity = " . intval($_POST['search_city_properties']));
 }
 else {
     $employees = $db->select("
     SELECT e.*,CONCAT(c.name, \", \", e.Address) AS AddressWithCity  
     FROM employees e
     LEFT JOIN cities c ON c.id = e.IdCity");
-}
+}*/
 $aEmployeesForJS = [];
 if(!empty($employees)){
     echo "<table>";

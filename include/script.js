@@ -89,7 +89,7 @@ function openModal(employeeID) {
   document.getElementById("inputFirstName").value = employee.FirstName;
   document.getElementById("inputLastName").value = employee.LastName;
   document.getElementById("inputTitle").value = employee.Title;
-  document.getElementById("inputTitleOfCourtesy").value = employee.TitleOfCourtesy;
+  document.getElementById("inputtitleesy").value = employee.titleesy;
   document.getElementById("inputBirthDate").value = employee.BirthDate;
   document.getElementById("inputHireDate").value = employee.HireDate;
   document.getElementById("inputAddress").value = employee.Address;
@@ -102,7 +102,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const selectElement = document.getElementById("search_options");
   const search_city_properties = document.getElementById("search_city_properties");
   const search_year_properties = document.getElementById("search_year_properties");
-  const search_titleofcourt_properties = document.getElementById("search_titleofcourt_properties");
+  const search_title_properties = document.getElementById("search_title_properties");
   // Add an event listener to the select element
   selectElement.addEventListener("change", function () {
     // Get the selected value from the select element
@@ -113,26 +113,26 @@ document.addEventListener("DOMContentLoaded", function () {
         critlabel.style.display = "inline";
         search_city_properties.style.display = "inline";
         search_year_properties.style.display = "none";
-        search_titleofcourt_properties.style.display = "none";
+        search_title_properties.style.display = "none";
         break;
       case "years":
         critlabel.style.display = "inline";
         search_city_properties.style.display = "none";
         search_year_properties.style.display = "inline";
-        search_titleofcourt_properties.style.display = "none";
+        search_title_properties.style.display = "none";
         break;
-      case "titleofcourtesy":
+      case "title":
         critlabel.style.display = "inline";
         search_city_properties.style.display = "none";
         search_year_properties.style.display = "none";
-        search_titleofcourt_properties.style.display = "inline";
+        search_title_properties.style.display = "inline";
         break;
         // Add more cases for other values if needed
       default:
         critlabel.style.display = "none";
         search_city_properties.style.display = "none";
         search_year_properties.style.display = "none";
-        search_titleofcourt_properties.style.display = "none";
+        search_title_properties.style.display = "none";
         break;
     }
   });

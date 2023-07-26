@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if (isset($_SESSION["username"])) {
             // Redirect to the login page or display an error message
-            header("Location: home.php");
+            header("Location: home2.php");
             exit();
         }
     }
