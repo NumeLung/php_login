@@ -57,7 +57,7 @@ $searchOption = $_POST['search_options'] ?? '';
                         <label>Работно място</label><br>
                         <input type="text" name="inputTitle" id="inputTitle"><br>
                         <label>Нарицание</label><br>
-                        <input type="text" name="inputtitle" id="inputtitle"><br>
+                        <input type="text" name="inputTitleOfCourtesy" id="inputTitleOfCourtesy"><br>
                         <label>Рожденна дата</label><br>
                         <input type="text" name="inputBirthDate" id="inputBirthDate" value="YYYY-MM-DD"><br>
                         <label>Дата наемане</label><br>
