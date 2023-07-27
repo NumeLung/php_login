@@ -30,7 +30,7 @@ switch ($_POST['summary']){
             echo "<td>" . $row["ConcatenatedNames"] . "</td>";
             echo "<td>";
             // Form to send data to load_summary.php
-            echo "<form method=\"POST\" action=\"home.php\">";
+            echo "<form method=\"POST\" action=\"home.php\" style=\"margin: 0px\"'>";
             echo "<input type=\"hidden\" name=\"search_options\" value=\"city\">";
             echo "<input type=\"hidden\" name=\"search_city_properties\" value=\"" . $row["idCity"] . "\">";
             echo "<button class=\"showBttn\" onclick=\"submitForm(this.form)\">Покажи</button>";
@@ -66,7 +66,7 @@ switch ($_POST['summary']){
             echo "<td>" . $row["ConcatenatedNames"] . "</td>";
             echo "<td>";
             // Form to send data to load_summary.php
-            echo "<form method=\"POST\" action=\"home.php\">";
+            echo "<form method=\"POST\" action=\"home.php\" style=\"margin: 0px\">";
             echo "<input type=\"hidden\" name=\"search_options\" value=\"years\">";
             echo "<input type=\"hidden\" name=\"search_year_properties\" value=\"" . $row["YearOfBirth"] . "\">";
             echo "<button class=\"showBttn\" onclick=\"submitForm(this.form)\">Покажи</button>";
@@ -101,7 +101,7 @@ switch ($_POST['summary']){
             echo "<td>" . $row["ConcatenatedNames"] . "</td>";
             echo "<td>";
             // Form to send data to load_summary.php
-            echo "<form method=\"POST\" action=\"home.php\">";
+            echo "<form method=\"POST\" action=\"home.php\" style=\"margin: 0px\">";
             echo "<input type=\"hidden\" name=\"search_options\" value=\"title\">";
             echo "<input type=\"hidden\" name=\"search_title_properties\" value=\"" . $row["Title"] . "\">";
             echo "<button class=\"showBttn\" onclick=\"submitForm(this.form)\">Покажи</button>";

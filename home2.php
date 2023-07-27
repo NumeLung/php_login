@@ -25,7 +25,7 @@ $summaryOption = $_POST['summary'] ?? '';
 
         <div id="navbar">
             <a href="logout.php">Logout</a>
-            <a href="home.php" class="active">Home</a>
+            <a href="home2.php" class="active">Home</a>
         </div>
 
         <?php

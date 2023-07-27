@@ -4,8 +4,8 @@ include "Database.php";
 $db = new Database();
 
 $inputEmployeeID = $_POST['inputEmployeeID'];
-$inputFirstName = mysqli_real_escape_string(CONN, $_POST['inputFirstName']);
-$inputLastName = mysqli_real_escape_string(CONN, $_POST['inputLastName']);
+$inputFirstName = mysqli_real_escape_string($CONN, $_POST['inputFirstName']);
+$inputLastName = mysqli_real_escape_string($CONN, $_POST['inputLastName']);
 $inputTitle = $_POST['inputTitle'];
 $inputTitleOfCourtesy = $_POST['inputTitleOfCourtesy'];
 $inputBirthDate = $_POST['inputBirthDate'];

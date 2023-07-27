@@ -4,4 +4,4 @@ const DBUSER = "root";
 const DBPASS = "";
 const DBNAME = "test";
 
-const CONN = new mysqli(HOST, DBUSER, DBPASS, DBNAME);
+$CONN = new mysqli(HOST, DBUSER, DBPASS, DBNAME);
