@@ -30,7 +30,7 @@ $summaryOption = $_POST['summary'] ?? '';
 
         <?php
         if ($_SESSION["isAdmin"] == 1){ ?>
-        <div class="container">
+        <div style="width: 50%; float: left;">
             <form method="POST">
                 <label for="summary">Тип</label>
                 <select name="summary">
@@ -43,6 +43,11 @@ $summaryOption = $_POST['summary'] ?? '';
             </form>
         </div>
         <?php } ?>
+
+        <?php
+        if ($_SESSION["isAdmin"] == 1){
+            include "podrobna.php";
+        } ?>
 
         <div class="container">
             <p style="text-align: center;">
